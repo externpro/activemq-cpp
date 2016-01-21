@@ -121,7 +121,7 @@ if(NOT HAVE_SIZEOF_SIZE_T)
 endif()
 set(CMAKE_EXTRA_INCLUDE_FILES)
 ########################################
-set(HAVE_OPENSSL FALSE) #TODO: determine
+set(HAVE_OPENSSL ${OPENSSL_FOUND})
 set_define(HAVE_OPENSSL 1)
 ########################################
 # Define if building universal (internal helper macro)
