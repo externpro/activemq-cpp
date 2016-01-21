@@ -1682,8 +1682,9 @@ list(APPEND ${lib_name}_libsrcs ${decaf_util_zip_srcs})
 #######################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
-target_include_directories(${lib_name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(${lib_name} SYSTEM PRIVATE ${APR_INCLUDE_DIR})
+target_link_libraries(${lib_name} ${APR_LIBRARIES} ${OPENSSL_LIBRARIES})
+target_include_directories(${lib_name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+target_include_directories(${lib_name} SYSTEM PUBLIC ${APR_INCLUDE_DIR})
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
   DESTINATION include/${lib_name}
   FILES_MATCHING PATTERN "*.h"
