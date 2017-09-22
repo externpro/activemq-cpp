@@ -1685,7 +1685,7 @@ add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
 target_link_libraries(${lib_name} ${APR_LIBRARIES} ${OPENSSL_LIBRARIES})
 target_include_directories(${lib_name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 target_include_directories(${lib_name} SYSTEM PUBLIC
-  $<BUILD_INTERFACE:${APR_INCLUDE_DIR}>
+  $<BUILD_INTERFACE:${APR_INCLUDE_DIRS}>
   $<BUILD_INTERFACE:${OPENSSL_INCLUDE_DIR}>
   )
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
