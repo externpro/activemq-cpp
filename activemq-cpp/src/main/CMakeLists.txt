@@ -1694,6 +1694,9 @@ target_include_directories(${lib_name} SYSTEM PUBLIC
   $<BUILD_INTERFACE:${APR_INCLUDE_DIRS}>
   $<BUILD_INTERFACE:${OPENSSL_INCLUDE_DIR}>
   )
+if(DEFINED APR_DEFINITIONS)
+  target_compile_definitions(${lib_name} PUBLIC ${APR_DEFINITIONS})
+endif()
 set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
   DESTINATION include${verDir}/${lib_name}
