@@ -1694,6 +1694,11 @@ target_include_directories(${lib_name} SYSTEM PUBLIC
   $<BUILD_INTERFACE:${APR_INCLUDE_DIRS}>
   $<BUILD_INTERFACE:${OPENSSL_INCLUDE_DIR}>
   )
+if(TARGET externpro::crypto)
+  get_target_property(defs externpro::crypto INTERFACE_COMPILE_DEFINITIONS)
+  string(REPLACE "OPENSSL_API_COMPAT=0x10100000L" "OPENSSL_API_COMPAT=0x00908000L" newDefs "${defs}")
+  set_target_properties(externpro::crypto PROPERTIES INTERFACE_COMPILE_DEFINITIONS "${newDefs}")
+endif()
 if(DEFINED APR_DEFINITIONS)
   target_compile_definitions(${lib_name} PUBLIC ${APR_DEFINITIONS})
 endif()
