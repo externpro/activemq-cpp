@@ -5,6 +5,7 @@ include(CheckIncludeFile)
 include(CheckLibraryExists)
 include(CheckSymbolExists)
 include(CheckTypeSize)
+include(CMakePushCheckState)
 include(TestBigEndian)
 ########################################
 function(set_define var)
@@ -104,6 +105,7 @@ else()
   set_define(HAVE_DOPRNT 1)
 endif()
 ##########
+cmake_push_check_state(RESET)
 set(CMAKE_EXTRA_INCLUDE_FILES ${AMQ_INCLUDES})
 check_type_size(char SIZEOF_CHAR)
 check_type_size(double SIZEOF_DOUBLE)
@@ -120,6 +122,7 @@ if(NOT HAVE_SIZEOF_SIZE_T)
   set(size_t "unsigned int") # Define to `unsigned int' if <sys/types.h> does not define.
 endif()
 set(CMAKE_EXTRA_INCLUDE_FILES)
+cmake_pop_check_state()
 ########################################
 set(HAVE_OPENSSL ${OPENSSL_FOUND})
 set_define(HAVE_OPENSSL 1)
