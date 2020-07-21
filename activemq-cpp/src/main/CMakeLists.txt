@@ -1689,7 +1689,9 @@ endif()
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
 target_link_libraries(${lib_name} PUBLIC ${APR_LIBRARIES} ${OPENSSL_LIBRARIES})
-target_include_directories(${lib_name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+target_include_directories(${lib_name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include${verDir}/${lib_name}>
+  )
 if(TARGET xpro::crypto)
   get_target_property(defs xpro::crypto INTERFACE_COMPILE_DEFINITIONS)
   string(REPLACE "OPENSSL_API_COMPAT=0x10100000L" "OPENSSL_API_COMPAT=0x00908000L" newDefs "${defs}")
@@ -1706,4 +1708,7 @@ install(TARGETS ${lib_name} EXPORT ${targetsFile}
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
   )
-install(EXPORT ${targetsFile} DESTINATION lib/cmake)
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
+endif()
+install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace})
