@@ -1680,35 +1680,28 @@ set(decaf_util_zip_srcs
 source_group(decaf\\util\\zip FILES ${decaf_util_zip_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_util_zip_srcs})
 #######################################
-# version
-if(DEFINED ACTIVEMQCPP_VER)
-  set(ver _${ACTIVEMQCPP_VER})
-  set(verDir /${lib_name}${ver})
-endif()
-#######################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
 target_link_libraries(${lib_name} PUBLIC ${APR_LIBRARIES} ${OPENSSL_LIBRARIES})
 target_include_directories(${lib_name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include${verDir}/${lib_name}>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${lib_name}>
   )
 if(TARGET xpro::crypto)
   get_target_property(defs xpro::crypto INTERFACE_COMPILE_DEFINITIONS)
   string(REPLACE "OPENSSL_API_COMPAT=0x10100000L" "OPENSSL_API_COMPAT=0x00908000L" newDefs "${defs}")
   set_target_properties(xpro::crypto PROPERTIES INTERFACE_COMPILE_DEFINITIONS "${newDefs}")
 endif()
-set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
-  DESTINATION include${verDir}/${lib_name}
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${lib_name}
   FILES_MATCHING PATTERN "*.h"
   )
-set(targetsFile ${lib_name}${ver}-targets)
+set(targetsFile ${lib_name}-targets)
 install(TARGETS ${lib_name} EXPORT ${targetsFile}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   )
 if(DEFINED XP_NAMESPACE)
   set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
 endif()
-install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace})
+install(EXPORT ${targetsFile} DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake ${nameSpace})
