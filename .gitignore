@@ -21,7 +21,7 @@ Makefile.in
 activemq-cpp/aclocal.m4
 activemq-cpp/config.h.in
 configure
-
-
-
-
+# externpro
+.env
+_bld*/
+docker-compose.override.yml

@@ -390,9 +390,9 @@ if(NOT ANSI_CONST)
 endif()
 set_define(const)
 ########################################
-configure_file(${CMAKE_SOURCE_DIR}/config.h.cmake.in .)
-configure_file(${CMAKE_BINARY_DIR}/config.h.cmake.in ${CMAKE_BINARY_DIR}/config.h)
-include_directories(${CMAKE_BINARY_DIR})
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake.in .)
+configure_file(${CMAKE_CURRENT_BINARY_DIR}/config.h.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 add_definitions(-DHAVE_CONFIG_H)
 ################################################################################
 set(CMAKE_REQUIRED_LIBRARIES)
