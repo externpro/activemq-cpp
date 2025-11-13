@@ -1,8 +1,5 @@
 set(lib_name activemqcpp)
 #######################################
-# library sources
-########################
-# activemq/cmsutil
 set(activemq_cmsutil_srcs
   activemq/cmsutil/CachedConsumer.cpp
   activemq/cmsutil/CachedConsumer.h
@@ -34,7 +31,6 @@ set(activemq_cmsutil_srcs
 source_group(activemq\\cmsutil FILES ${activemq_cmsutil_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_cmsutil_srcs})
 ##########
-# activemq/commands
 set(activemq_commands_srcs
   activemq/commands/ActiveMQBlobMessage.cpp
   activemq/commands/ActiveMQBlobMessage.h
@@ -169,7 +165,6 @@ set(activemq_commands_srcs
 source_group(activemq\\commands FILES ${activemq_commands_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_commands_srcs})
 ##########
-# activemq/core
 set(activemq_core_srcs
   activemq/core/ActiveMQAckHandler.cpp
   activemq/core/ActiveMQAckHandler.h
@@ -252,7 +247,6 @@ set(activemq_core_policies_srcs
 source_group(activemq\\core\\policies FILES ${activemq_core_policies_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_core_policies_srcs})
 ##########
-# activemq/exceptions
 set(activemq_exceptions_srcs
   activemq/exceptions/ActiveMQException.cpp
   activemq/exceptions/ActiveMQException.h
@@ -265,7 +259,6 @@ set(activemq_exceptions_srcs
 source_group(activemq\\exceptions FILES ${activemq_exceptions_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_exceptions_srcs})
 ##########
-# activemq/io
 set(activemq_io_srcs
   activemq/io/LoggingInputStream.cpp
   activemq/io/LoggingInputStream.h
@@ -275,7 +268,6 @@ set(activemq_io_srcs
 source_group(activemq\\io FILES ${activemq_io_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_io_srcs})
 ##########
-# activemq/library
 set(activemq_library_srcs
   activemq/library/ActiveMQCPP.cpp
   activemq/library/ActiveMQCPP.h
@@ -283,7 +275,6 @@ set(activemq_library_srcs
 source_group(activemq\\library FILES ${activemq_library_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_library_srcs})
 ##########
-# activemq/state
 set(activemq_state_srcs
   activemq/state/CommandVisitorAdapter.cpp
   activemq/state/CommandVisitorAdapter.h
@@ -307,7 +298,6 @@ set(activemq_state_srcs
 source_group(activemq\\state FILES ${activemq_state_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_state_srcs})
 ##########
-# activemq/threads
 set(activemq_threads_srcs
   activemq/threads/CompositeTask.cpp
   activemq/threads/CompositeTask.h
@@ -327,7 +317,6 @@ set(activemq_threads_srcs
 source_group(activemq\\threads FILES ${activemq_threads_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_threads_srcs})
 ##########
-# activemq/transport
 set(activemq_transport_srcs
   activemq/transport/AbstractTransportFactory.cpp
   activemq/transport/AbstractTransportFactory.h
@@ -423,7 +412,6 @@ set(activemq_transport_tcp_srcs
 source_group(activemq\\transport\\tcp FILES ${activemq_transport_tcp_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_transport_tcp_srcs})
 ##########
-# activemq/util
 set(activemq_util_srcs
   activemq/util/ActiveMQMessageTransformation.cpp
   activemq/util/ActiveMQMessageTransformation.h
@@ -470,7 +458,6 @@ set(activemq_util_srcs
 source_group(activemq\\util FILES ${activemq_util_srcs})
 list(APPEND ${lib_name}_libsrcs ${activemq_util_srcs})
 ##########
-# activemq/wireformat
 set(activemq_wireformat_srcs
   activemq/wireformat/MarshalAware.cpp
   activemq/wireformat/MarshalAware.h
@@ -778,7 +765,6 @@ set(cms_srcs
 source_group(cms FILES ${cms_srcs})
 list(APPEND ${lib_name}_libsrcs ${cms_srcs})
 ##########
-# decaf/internal
 set(decaf_internal_srcs
   decaf/internal/AprPool.cpp
   decaf/internal/AprPool.h
@@ -1050,7 +1036,6 @@ set(decaf_internal_util_zip_srcs
 source_group(decaf\\internal\\util\\zip FILES ${decaf_internal_util_zip_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_internal_util_zip_srcs})
 ##########
-# decaf/io
 set(decaf_io_srcs
   decaf/io/BlockingByteArrayInputStream.cpp
   decaf/io/BlockingByteArrayInputStream.h
@@ -1108,7 +1093,6 @@ set(decaf_io_srcs
 source_group(decaf\\io FILES ${decaf_io_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_io_srcs})
 ##########
-# decaf/lang
 set(decaf_lang_srcs
   decaf/lang/AbstractStringBuilder.cpp
   decaf/lang/AbstractStringBuilder.h
@@ -1214,7 +1198,6 @@ set(decaf_lang_exceptions_srcs
 source_group(decaf\\lang\\exceptions FILES ${decaf_lang_exceptions_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_lang_exceptions_srcs})
 ##########
-# decaf/net
 set(decaf_net_srcs
   decaf/net/BindException.cpp
   decaf/net/BindException.h
@@ -1313,7 +1296,6 @@ set(decaf_net_ssl_srcs
 source_group(decaf\\net\\ssl FILES ${decaf_net_ssl_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_net_ssl_srcs})
 ##########
-# decaf/nio
 set(decaf_nio_srcs
   decaf/nio/Buffer.cpp
   decaf/nio/Buffer.h
@@ -1343,7 +1325,6 @@ set(decaf_nio_srcs
 source_group(decaf\\nio FILES ${decaf_nio_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_nio_srcs})
 ##########
-# decaf/security
 set(decaf_security_srcs
   decaf/security/DigestException.cpp
   decaf/security/DigestException.h
@@ -1415,7 +1396,6 @@ set(decaf_security_cert_srcs
 source_group(decaf\\security\\cert FILES ${decaf_security_cert_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_security_cert_srcs})
 ##########
-# decaf/util
 set(decaf_util_srcs
   decaf/util/AbstractCollection.cpp
   decaf/util/AbstractCollection.h
@@ -1680,7 +1660,6 @@ set(decaf_util_zip_srcs
 source_group(decaf\\util\\zip FILES ${decaf_util_zip_srcs})
 list(APPEND ${lib_name}_libsrcs ${decaf_util_zip_srcs})
 #######################################
-# library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
 target_link_libraries(${lib_name} PUBLIC ${APR_LIBRARIES} ${OPENSSL_LIBRARIES})
 target_include_directories(${lib_name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
