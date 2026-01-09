@@ -1,5 +1,13 @@
 find_package(apr REQUIRED)
 find_package(openssl REQUIRED)
+# determine version from configure.ac
+file(STRINGS configure.ac MAJOR REGEX "^ACTIVEMQ_MAJOR_VERSION=([0-9]+)")
+file(STRINGS configure.ac MINOR REGEX "^ACTIVEMQ_MINOR_VERSION=([0-9]+)")
+file(STRINGS configure.ac PATCH REGEX "^ACTIVEMQ_PATCH_VERSION=([0-9]+)")
+string(REGEX MATCH "([0-9]+)" MAJOR ${MAJOR})
+string(REGEX MATCH "([0-9]+)" MINOR ${MINOR})
+string(REGEX MATCH "([0-9]+)" PATCH ${PATCH})
+set(AMQ_VER ${MAJOR}.${MINOR}.${PATCH})
 if(UNIX)
   include(configure.cmake)
 endif()

@@ -106,14 +106,6 @@ if(HAVE_VISIBILITY_OPTIONS)
 endif()
 xpcfgLtObjdir(LT_OBJDIR)
 ####################
-# determine version from configure.ac
-file(STRINGS configure.ac MAJOR REGEX "^ACTIVEMQ_MAJOR_VERSION=([0-9]+)")
-file(STRINGS configure.ac MINOR REGEX "^ACTIVEMQ_MINOR_VERSION=([0-9]+)")
-file(STRINGS configure.ac PATCH REGEX "^ACTIVEMQ_PATCH_VERSION=([0-9]+)")
-string(REGEX MATCH "([0-9]+)" MAJOR ${MAJOR})
-string(REGEX MATCH "([0-9]+)" MINOR ${MINOR})
-string(REGEX MATCH "([0-9]+)" PATCH ${PATCH})
-set(ver ${MAJOR}.${MINOR}.${PATCH})
 # Name of package
 set(PACKAGE "\"${PROJECT_NAME}\"")
 # Define to the address where bug reports for this package should be sent.
@@ -121,15 +113,15 @@ set(PACKAGE_BUGREPORT "\"dev@activemq.apache.org\"")
 # Define to the full name of this package.
 set(PACKAGE_NAME "\"${PROJECT_NAME}\"")
 # Define to the full name and version of this package.
-set(PACKAGE_STRING "\"${PROJECT_NAME} ${ver}\"")
+set(PACKAGE_STRING "\"${PROJECT_NAME} ${AMQ_VER}\"")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME "\"${PROJECT_NAME}\"")
 # Define to the home page for this package.
 set(PACKAGE_URL "\"http://activemq.apache.org/cms/\"")
 # Define to the version of this package.
-set(PACKAGE_VERSION "\"${ver}\"")
+set(PACKAGE_VERSION "\"${AMQ_VER}\"")
 # Version number of package
-set(VERSION "\"${ver}\"")
+set(VERSION "\"${AMQ_VER}\"")
 ####################
 xpcfgCheckPthreadAttrArgs(
   PTHREAD_ATTR_GETDETACHSTATE_TAKES_ONE_ARG
