@@ -1665,10 +1665,14 @@ target_link_libraries(${lib_name} PUBLIC ${APR_LIBRARIES} ${OPENSSL_LIBRARIES})
 target_include_directories(${lib_name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${lib_name}>
   )
-if(TARGET xpro::crypto)
-  get_target_property(defs xpro::crypto INTERFACE_COMPILE_DEFINITIONS)
-  string(REPLACE "OPENSSL_API_COMPAT=0x10100000L" "OPENSSL_API_COMPAT=0x00908000L" newDefs "${defs}")
-  set_target_properties(xpro::crypto PROPERTIES INTERFACE_COMPILE_DEFINITIONS "${newDefs}")
+if(TARGET opensssl::crypto)
+  get_target_property(defs openssl::crypto INTERFACE_COMPILE_DEFINITIONS)
+  if(defs)
+    string(REPLACE "OPENSSL_API_COMPAT=0x10100000L" "OPENSSL_API_COMPAT=0x00908000L" newDefs "${defs}")
+    if(NOT newDefs STREQUAL defs)
+      set_target_properties(openssl::crypto PROPERTIES INTERFACE_COMPILE_DEFINITIONS "${newDefs}")
+    endif()
+  endif()
 endif()
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${lib_name}
@@ -1679,7 +1683,4 @@ install(TARGETS ${lib_name} EXPORT ${targetsFile}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   )
-if(DEFINED XP_NAMESPACE)
-  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
-endif()
-install(EXPORT ${targetsFile} DESTINATION ${CMAKE_INSTALL_CMAKEDIR} ${nameSpace})
+install(EXPORT ${targetsFile} DESTINATION ${CMAKE_INSTALL_CMAKEDIR} NAMESPACE ${CMAKE_PROJECT_NAME}::)

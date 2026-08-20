@@ -1,5 +1,11 @@
 find_package(apr REQUIRED)
 find_package(openssl REQUIRED)
+if(NOT DEFINED APR_LIBRARIES AND TARGET apr::apr-1)
+  set(APR_LIBRARIES apr::apr-1)
+endif()
+if(NOT DEFINED OPENSSL_LIBRARIES AND TARGET openssl::crypto AND TARGET openssl::ssl)
+  set(OPENSSL_LIBRARIES openssl::crypto openssl::ssl)
+endif()
 # determine version from configure.ac
 file(STRINGS configure.ac MAJOR REGEX "^ACTIVEMQ_MAJOR_VERSION=([0-9]+)")
 file(STRINGS configure.ac MINOR REGEX "^ACTIVEMQ_MINOR_VERSION=([0-9]+)")
@@ -18,12 +24,17 @@ if(has_noDeprecatedDeclarations)
 endif()
 set(lib activemqcpp)
 set(targetsFile ${lib}-targets)
-xpExternPackage(NAMESPACE ${XP_NAMESPACE}
-  TARGETS_FILE ${targetsFile} LIBRARIES activemqcpp
-  BASE ${CMAKE_PROJECT_NAME}-${AMQ_VER} XPDIFF "auto" DEPS apr openssl
-  WEB "http://activemq.apache.org/cms/" UPSTREAM "github.com/apache/activemq-cpp"
-  DESC "ActiveMQ C++ Messaging Service (CMS) client library"
-  LICENSE "[Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0.html 'Apache License, Version 2.0')"
-  )
+if(NOT DEFINED CMAKE_INSTALL_CMAKEDIR)
+  set(CMAKE_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATADIR}/cmake)
+endif()
 add_subdirectory(src/main)
 add_subdirectory(src/examples)
+if(COMMAND xpExternPackage)
+  xpExternPackage(TARGETS_FILE ${targetsFile}
+    LIBRARIES ${lib} DEFAULT_TARGETS ${lib}
+    BASE ${CMAKE_PROJECT_NAME}-${AMQ_VER} XPDIFF "auto"
+    WEB "http://activemq.apache.org/cms/" UPSTREAM "github.com/apache/activemq-cpp"
+    DESC "ActiveMQ C++ Messaging Service (CMS) client library"
+    LICENSE "[Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0.html 'Apache License, Version 2.0')"
+    )
+endif()
