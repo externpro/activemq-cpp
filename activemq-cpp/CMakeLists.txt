@@ -1,11 +1,5 @@
 find_package(apr REQUIRED)
 find_package(openssl REQUIRED)
-if(NOT DEFINED APR_LIBRARIES AND TARGET apr::apr-1)
-  set(APR_LIBRARIES apr::apr-1)
-endif()
-if(NOT DEFINED OPENSSL_LIBRARIES AND TARGET openssl::crypto AND TARGET openssl::ssl)
-  set(OPENSSL_LIBRARIES openssl::crypto openssl::ssl)
-endif()
 # determine version from configure.ac
 file(STRINGS configure.ac MAJOR REGEX "^ACTIVEMQ_MAJOR_VERSION=([0-9]+)")
 file(STRINGS configure.ac MINOR REGEX "^ACTIVEMQ_MINOR_VERSION=([0-9]+)")
